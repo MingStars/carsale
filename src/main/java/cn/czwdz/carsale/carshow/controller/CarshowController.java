@@ -115,6 +115,9 @@ public class CarshowController {
 		//获取map中的key的集合
 		Set<Object> keys=maps.keySet();
 
+
+
+
         model.addAttribute("keys",keys);
 		model.addAttribute("count",20);
 		model.addAttribute("pageCount", 2);
