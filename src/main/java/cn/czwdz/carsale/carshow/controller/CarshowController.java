@@ -15,7 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import redis.clients.jedis.Jedis;
+
+
 
 
 @Controller
@@ -34,6 +35,7 @@ public class CarshowController {
 	private SafetyServices safety;
     @Autowired
 	private RedisUtils redisUtils;
+
 
 
 
@@ -63,6 +65,10 @@ public class CarshowController {
 		model.addAttribute("userId",userId);
 //		System.out.println(chassis.getChassis(id).getAuto_power_type()+"1111");
 //		System.out.println(list1+"11111");
+		if(true){
+
+		}
+
 		return "car/details0";
 	}
 //	//我要卖车
