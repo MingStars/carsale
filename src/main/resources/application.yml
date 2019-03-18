@@ -1,0 +1,55 @@
+server:
+  address: localhost
+  port: 8080
+
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 6
+        max-wait: 1000
+        min-idle: 2
+    timeout: 1000
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/carsale?useUnicode=true&amp;charactherEncoding=utf-8
+    username: root
+    password: root
+  mvc:
+    view:
+      prefix: /WEB-INF/pages/
+      suffix: .jsp
+
+    filters: stat,log4j
+
+    maxAtive: 20
+
+    maxWait: 60000
+
+    initialSize: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: false
+    maxPoolPreparedStatementPerConnectionSize: 200
+
+
+
+
+
+mybatis:
+  type-aliases-package: cn.czwdz.carsale.manager.pojo
+
+shiro:
+  configLocation: classpath:/ehcache.xml
+
+
+

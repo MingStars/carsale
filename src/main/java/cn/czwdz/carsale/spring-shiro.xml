@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	<!-- 配置shiro框架的过滤器工厂bean -->
+	<bean id="shiroFilter"
+		class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/login/one" />
+		<property name="successUrl" value="/login/home" /> 
+		<property name="unauthorizedUrl" value="/login/one" />
+		<!-- 指定URL拦截策略 ,静态资源放行，登录放行，其他的需要认证也就是登录-->
+		<property name="filterChainDefinitions">
+			<value>
+			
+				/resources/**=anon
+				/css/**=anon
+				/js/**=anon
+				/images/**=anon
+				/one=anon
+				/login-multi=anon
+				/home**=anon
+				/page/login-multi.jsp*=anon
+				/login/**=anon
+				/validatecode.jsp*=anon
+				/**=authc
+				<!-- /**=authc -->
+			</value>
+		</property>
+	</bean>
+	<!-- 配置安全管理器 -->
+	<bean id="securityManager"
+		class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="gloabRealm" />
+		<!-- 注入缓存管理器 -->
+		<property name="cacheManager" ref="cacheManager" />
+	</bean>
+	<!-- 注册自定义realm -->
+	<bean id="gloabRealm"
+		class="cn.czwdz.carsale.manager.service.GloabRealm" />
+	<!-- 注册缓存管理器 -->
+	<bean id="cacheManager"
+		class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<!-- 注入ehcache配置文件 -->
+		<property name="cacheManagerConfigFile"
+			value="classpath:ehcache.xml" />
+	</bean>
+	<!-- 开启shiro注解加到springmvc.xml中去了，因为不加那里会导致注解失效 -->
+</beans>
